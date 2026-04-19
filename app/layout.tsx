@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { Sidebar } from "@/components/sidebar";
+import { DashboardShell } from "@/components/dashboard-shell";
 
 const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
@@ -29,13 +29,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", inter.variable)}
     >
-      <body className="min-h-full bg-slate-50 flex">
-        <Sidebar className="w-64 hidden md:block shrink-0" />
-        <main className="flex-1 w-full min-h-screen">
+      <body suppressHydrationWarning className="min-h-full bg-slate-50">
+        <DashboardShell>
           {children}
-        </main>
+        </DashboardShell>
       </body>
     </html>
   );
