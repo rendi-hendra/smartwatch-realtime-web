@@ -21,13 +21,34 @@ import {
   Loader2,
   AlertCircle,
   Clock,
-  Activity
+  Activity,
+  Download
 } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import * as XLSX from 'xlsx';
 
 export default function HistoryPage() {
   const { device, history, loading, selectedDate, setSelectedDate } = useHistoryData();
+
+  const handleExport = () => {
+    if (!history || history.length === 0) return;
+
+    const exportData = history.map(item => ({
+      Time: format(new Date(item.timestamp), "HH:mm:ss"),
+      "Heart Rate (bpm)": item.heartRate || '-',
+      "Steps": item.steps || '-',
+      "SpO2 (%)": item.oxygenSaturation || '-',
+      "HRV (ms)": item.heartRateVariabilityRmssd ? Math.round(item.heartRateVariabilityRmssd) : '-',
+      "Calories (kcal)": item.activeCaloriesBurned ? Math.round(item.activeCaloriesBurned) : '-',
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(exportData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "History");
+    
+    XLSX.writeFile(workbook, `Smartwatch_History_${format(selectedDate, "yyyy-MM-dd")}.xlsx`);
+  };
 
   return (
     <div className="flex-1 space-y-6 p-8 pt-6">
@@ -39,6 +60,15 @@ export default function HistoryPage() {
         
         {/* Date Picker using Shadcn */}
         <div className="flex items-center gap-2">
+            <Button 
+              variant="outline" 
+              className="border-slate-200 shadow-sm gap-2"
+              onClick={handleExport}
+              disabled={loading || history.length === 0}
+            >
+              <Download className="w-4 h-4" />
+              Export
+            </Button>
             <Popover>
               <PopoverTrigger asChild>
                 <Button
