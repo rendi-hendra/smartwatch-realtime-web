@@ -1,24 +1,14 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyCykZk0DOCdUemwsCDOYpzZ8BouGt4XBAE",
-//   authDomain: "smartwatch-monitor.firebaseapp.com",
-//   databaseURL: "https://smartwatch-monitor-default-rtdb.asia-southeast1.firebasedatabase.app",
-//   projectId: "smartwatch-monitor",
-//   storageBucket: "smartwatch-monitor.firebasestorage.app",
-//   messagingSenderId: "499423059866",
-//   appId: "1:499423059866:web:d6724f6c995683bb512423",
-// };
-
 const firebaseConfig = {
-    apiKey: "AIzaSyCykZk0DOCdUemwsCDOYpzZ8BouGt4XBAE",
-    authDomain: "smartwatch-monitor.firebaseapp.com",
-    databaseURL: "https://smartwatch-monitor-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "smartwatch-monitor",
-    storageBucket: "smartwatch-monitor.firebasestorage.app",
-    messagingSenderId: "499423059866",
-    appId: "1:499423059866:android:b3cfad7ad3dbed79512423"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase
