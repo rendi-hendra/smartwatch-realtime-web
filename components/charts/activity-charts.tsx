@@ -67,7 +67,7 @@ export function StepProgressChart({ summary }: { summary: ActivitySummary }) {
       x: {
         grid: { display: false },
         border: { display: false },
-        ticks: { font: { size: 11, weight: '500' as const } }
+        ticks: { font: { size: 11, weight: 500 } }
       }
     },
   };
