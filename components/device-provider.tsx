@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { db } from "@/lib/firebase";
-import { ref, onValue } from "firebase/database";
+import { ref, onValue, remove } from "firebase/database";
 
 export interface DeviceBasicInfo {
   deviceId: string;
@@ -14,6 +14,7 @@ interface DeviceContextType {
   selectedDeviceId: string | null;
   setSelectedDeviceId: (id: string) => void;
   isLoadingDevices: boolean;
+  deleteDevice: (id: string) => Promise<void>;
 }
 
 const DeviceContext = createContext<DeviceContextType | undefined>(undefined);
@@ -40,6 +41,15 @@ export function DeviceProvider({ children }: { children: React.ReactNode }) {
   const setSelectedDeviceId = (id: string) => {
     localStorage.setItem("smartfit_selected_device", id);
     setSelectedDeviceIdState(id);
+  };
+
+  const deleteDevice = async (id: string) => {
+    try {
+      await remove(ref(db, `devices/${id}`));
+      await remove(ref(db, `health_data/${id}`));
+    } catch (error) {
+      console.error("Failed to delete device", error);
+    }
   };
 
   useEffect(() => {
@@ -76,7 +86,7 @@ export function DeviceProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <DeviceContext.Provider value={{ availableDevices, selectedDeviceId, setSelectedDeviceId, isLoadingDevices }}>
+    <DeviceContext.Provider value={{ availableDevices, selectedDeviceId, setSelectedDeviceId, isLoadingDevices, deleteDevice }}>
       {children}
     </DeviceContext.Provider>
   );

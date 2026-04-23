@@ -76,7 +76,7 @@ export default function ActivityPage() {
       </div>
 
       {/* Main Stats Cards */}
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2">
         {/* Total Steps */}
         <Card className="rounded-2xl border-emerald-100 shadow-sm bg-gradient-to-br from-emerald-50/50 to-white overflow-hidden border-2">
           <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
@@ -120,26 +120,6 @@ export default function ActivityPage() {
                <TrendingUp className="h-3.5 w-3.5 text-emerald-500" />
                <span className="font-medium text-emerald-600">+12%</span>
                <span>from yesterday</span>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Average Intensity (Derived or Status) */}
-        <Card className="rounded-2xl border-slate-200 shadow-sm bg-white overflow-hidden">
-          <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-            <CardTitle className="text-sm font-semibold text-slate-600">Personal Best</CardTitle>
-            <div className="p-2 bg-blue-50 text-blue-500 rounded-xl">
-              <Award className="h-5 w-5" />
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-extrabold text-slate-800 tracking-tight">12,408</span>
-              <span className="text-sm font-medium text-slate-400">steps</span>
-            </div>
-            <div className="flex items-center gap-1.5 mt-3 text-xs text-slate-500">
-               <Calendar className="h-3.5 w-3.5 text-slate-400" />
-               <span>Achieved on April 12, 2026</span>
             </div>
           </CardContent>
         </Card>

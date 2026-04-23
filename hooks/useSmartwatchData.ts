@@ -49,9 +49,9 @@ export function useSmartwatchData() {
       if (snapshot.exists()) {
         const devData = snapshot.val();
         
-        // Determine online status (offline if no sync for 10 seconds)
+        // Determine online status (offline if no sync for 6 minutes)
         const now = Date.now();
-        const isOnline = (now - devData.lastSync) < 10000;
+        const isOnline = (now - devData.lastSync) < 360000;
         
         const device = {
           deviceId: selectedDeviceId,
@@ -105,7 +105,7 @@ export function useSmartwatchData() {
     const statusCheckInterval = setInterval(() => {
       setData(prev => {
         if (prev.device) {
-          const isOnline = (Date.now() - prev.device.lastSync) < 10000;
+          const isOnline = (Date.now() - prev.device.lastSync) < 360000;
           if (prev.device.status === (isOnline ? 'Online' : 'Offline')) return prev; // no change
           return {
             ...prev,

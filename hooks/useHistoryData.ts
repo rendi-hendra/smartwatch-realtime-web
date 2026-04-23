@@ -41,7 +41,7 @@ export function useHistoryData(initialDate: Date = new Date()) {
           deviceId: selectedDeviceId,
           deviceName: devData.deviceName || 'Smartwatch',
           lastSync: devData.lastSync,
-          status: (now - devData.lastSync) < 10000 ? 'Online' : 'Offline',
+          status: (now - devData.lastSync) < 360000 ? 'Online' : 'Offline',
         };
 
           // Calculate start and end of the selected date

@@ -4,6 +4,7 @@ import { useSmartwatchData } from "@/hooks/useSmartwatchData";
 import { HeartRateChart } from "@/components/charts/heart-rate-chart";
 import { ActivityChart } from "@/components/charts/activity-chart";
 import { DeviceSelector } from "@/components/device-selector";
+import { PersonalBest } from "@/components/personal-best";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Card,
@@ -329,6 +330,9 @@ export default function Home() {
 
         {/* RIGHT COLUMN: Right Panel (Secondary Information) */}
         <div className="md:col-span-2 flex flex-col gap-6">
+          {/* Personal Best Box */}
+          <PersonalBest />
+
           {/* Quick Insight Box */}
           <Card className="rounded-2xl border border-blue-100 shadow-sm bg-gradient-to-b from-blue-50 to-white overflow-hidden">
             <CardHeader className="pb-2">
